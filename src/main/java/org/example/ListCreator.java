@@ -131,10 +131,12 @@ public class ListCreator {
             for (int i = 1; i < collection.size() + 1; i++) {
                 bufferedWriter.append("Группа " + i);
                 bufferedWriter.newLine();
-                for (String line :
+                bufferedWriter.newLine();
+
+
+                for (String s :
                         collection.get(i - 1)) {
-                    bufferedWriter.append(line).append(";");
-                    bufferedWriter.newLine();
+                    bufferedWriter.append(s);
                     bufferedWriter.newLine();
                 }
                 bufferedWriter.newLine();

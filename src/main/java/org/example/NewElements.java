@@ -6,7 +6,6 @@ public class NewElements {
     private final int position;
 
 
-
     public NewElements(String string, int position) {
         this.string = string;
         this.position = position;
