@@ -56,7 +56,7 @@ public class ListCreator {
                     columns.add(new HashMap<>());
 
 
-                if ("\"\"".equals(currentLineElement)) {
+                if ("\"\"".equals(currentLineElement) || currentLineElement.isEmpty()) {
                     continue;
                 }
 
