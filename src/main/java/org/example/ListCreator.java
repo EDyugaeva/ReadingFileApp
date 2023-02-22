@@ -11,23 +11,8 @@ public class ListCreator {
         HashSet<String> hashSet = readFile(path);//читаем файл
         List<List<String>> listOfLists = findAndGroupLines(new ArrayList<>(hashSet));//делим его на группы
         createFile(listOfLists);
-
         printResults(listOfLists);
 
-
-    }
-
-    private void printResults(List<List<String>> listOfLists) {
-        int size = listOfLists.size();
-        System.out.println("Количество групп = " + size);
-        for (int i = 1; i < size + 1; i++) {
-            System.out.println("Группа " + i);
-            for (String lines :
-                    listOfLists.get(i - 1)) {
-                System.out.println(lines);
-            }
-            System.out.println();
-        }
     }
 
     private HashSet<String> readFile(String path) {
@@ -90,7 +75,6 @@ public class ListCreator {
                 }
             }
             if (correctLine) {
-
                 int groupNumber;
                 if (groupsWithSameElems.isEmpty()) {
                     linesGroups.add(new ArrayList<>());
@@ -118,16 +102,19 @@ public class ListCreator {
 
     private static List<List<String>> sortList(List<List<String>> list) {
         list.removeAll(Collections.singleton(null)); //Удаляем пустые группы
-            list.removeIf(l -> l.size() == 1);
-            list.sort(comparing(List::size));
-            Collections.reverse(list);
-
+        list.removeIf(l -> l.size() == 1);//удаляем группы с 1 элементом
+        list.sort(comparing(List::size));//сортируем
+        Collections.reverse(list);
         return list;
     }
 
     private static void createFile(List<List<String>> collection) {
         try (
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.txt"))) {
+            bufferedWriter.append("Количество групп с более чем одним элементом = ").append(String.valueOf(collection.size()));
+            bufferedWriter.newLine();
+            bufferedWriter.newLine();
+
             for (int i = 1; i < collection.size() + 1; i++) {
                 bufferedWriter.append("Группа " + i);
                 bufferedWriter.newLine();
@@ -145,6 +132,19 @@ public class ListCreator {
         } catch (IOException ex) {
 
             System.out.println(ex.getMessage());
+        }
+    }
+
+    private void printResults(List<List<String>> listOfLists) {
+        int size = listOfLists.size();
+        System.out.println("Количество групп = " + size);
+        for (int i = 1; i < size + 1; i++) {
+            System.out.println("Группа " + i);
+            for (String lines :
+                    listOfLists.get(i - 1)) {
+                System.out.println(lines);
+            }
+            System.out.println();
         }
     }
 
