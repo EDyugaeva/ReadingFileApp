@@ -6,10 +6,8 @@ public class Main {
         ListCreator listCreator = new ListCreator();
 
         for (String str : args) {
-            if (!str.equals("-Xmx1G")) {
-                listCreator.divideFileIntoGroups(str);
-            }
-        }
+            listCreator.divideFileIntoGroups(str);
+                    }
         System.out.println("Время выполнения программы = " + (System.currentTimeMillis() - time) + " мс");
 
     }
